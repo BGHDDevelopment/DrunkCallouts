@@ -1,0 +1,9 @@
+C:\Users\USER\RiderProjects\DrunkCallouts\DrunkCallouts\bin\Debug\DrunkCallouts.net.dll
+C:\Users\USER\RiderProjects\DrunkCallouts\DrunkCallouts\bin\Debug\DrunkCallouts.net.pdb
+C:\Users\USER\RiderProjects\DrunkCallouts\DrunkCallouts\bin\Debug\CalloutAPI.net.dll
+C:\Users\USER\RiderProjects\DrunkCallouts\DrunkCallouts\bin\Debug\CitizenFX.Core.dll
+C:\Users\USER\RiderProjects\DrunkCallouts\DrunkCallouts\obj\Debug\DrunkCallouts.csprojAssemblyReference.cache
+C:\Users\USER\RiderProjects\DrunkCallouts\DrunkCallouts\obj\Debug\DrunkCallouts.csproj.CoreCompileInputs.cache
+C:\Users\USER\RiderProjects\DrunkCallouts\DrunkCallouts\obj\Debug\DrunkCallouts.csproj.CopyComplete
+C:\Users\USER\RiderProjects\DrunkCallouts\DrunkCallouts\obj\Debug\DrunkCallouts.net.dll
+C:\Users\USER\RiderProjects\DrunkCallouts\DrunkCallouts\obj\Debug\DrunkCallouts.net.pdb
