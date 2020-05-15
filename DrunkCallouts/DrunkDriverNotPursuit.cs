@@ -11,14 +11,14 @@ using CitizenFX.Core.Native;
 namespace DrunkCallouts
 {
     
-    [CalloutProperties("Drunk Driver", "BGHDDevelopment", "0.0.1", Callout.Probability.Medium)]
+    [CalloutProperties("Drunk Driver", "BGHDDevelopment", "0.0.2", Probability.Medium)]
     public class DrunkDriverNotPursuit : Callout
     {
 
         private Vehicle car;
         private Ped driver;
         List<object> items = new List<object>();
-        private string[] carList = { "speedo", "speedo2", "squalo", "stanier", "stinger", "stingergt", "stratum", "stretch", "taco", "tornado", "tornado2", "tornado3", "tornado4", "tourbus", "vader", "voodoo2", "dune5", "youga", "taxi", "tailgater", "sentinel2", "sentinel", "sandking2", "sandking", "ruffian", "rumpo", "rumpo2", "oracle2", "oracle", "ninef2", "ninef", "minivan", "gburrito", "emperor2", "emperor"};
+        private string[] carList = { "speedo", "speedo2", "stanier", "stinger", "stingergt", "stratum", "stretch", "taco", "tornado", "tornado2", "tornado3", "tornado4", "tourbus", "vader", "voodoo2", "dune5", "youga", "taxi", "tailgater", "sentinel2", "sentinel", "sandking2", "sandking", "ruffian", "rumpo", "rumpo2", "oracle2", "oracle", "ninef2", "ninef", "minivan", "gburrito", "emperor2", "emperor"};
 
         public DrunkDriverNotPursuit() {
             Random rnd = new Random();
@@ -37,9 +37,6 @@ namespace DrunkCallouts
             dynamic playerData = GetPlayerData();
             string displayName = playerData.DisplayName;
             API.SetPedIsDrunk(driver.GetHashCode(), true);
-            /*API.SetDriveTaskMaxCruiseSpeed(driver.GetHashCode(), 35f);
-            API.SetDriveTaskDrivingStyle(driver.GetHashCode(), 524852);*/
-            //driver.Task(player);
             driver.Task.WanderAround();
             driver.Task.CruiseWithVehicle(car, 35f,524852);
             car.AttachBlip();

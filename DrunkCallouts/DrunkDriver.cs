@@ -10,14 +10,14 @@ using CitizenFX.Core.Native;
 namespace DrunkCallouts
 {
     
-    [CalloutProperties("Drunk Driver Pursuit", "BGHDDevelopment", "0.0.1", Callout.Probability.Medium)]
+    [CalloutProperties("Drunk Driver Pursuit", "BGHDDevelopment", "0.0.2", Callout.Probability.Medium)]
     public class DrunkDriver : Callout
     {
 
         private Vehicle car;
         private Ped driver;
         List<object> items = new List<object>();
-        private string[] carList = { "speedo", "speedo2", "squalo", "stanier", "stinger", "stingergt", "stratum", "stretch", "taco", "tornado", "tornado2", "tornado3", "tornado4", "tourbus", "vader", "voodoo2", "dune5", "youga", "taxi", "tailgater", "sentinel2", "sentinel", "sandking2", "sandking", "ruffian", "rumpo", "rumpo2", "oracle2", "oracle", "ninef2", "ninef", "minivan", "gburrito", "emperor2", "emperor"};
+        private string[] carList = { "speedo", "speedo2", "stanier", "stinger", "stingergt", "stratum", "stretch", "taco", "tornado", "tornado2", "tornado3", "tornado4", "tourbus", "vader", "voodoo2", "dune5", "youga", "taxi", "tailgater", "sentinel2", "sentinel", "sandking2", "sandking", "ruffian", "rumpo", "rumpo2", "oracle2", "oracle", "ninef2", "ninef", "minivan", "gburrito", "emperor2", "emperor"};
 
         public DrunkDriver() {
             Random rnd = new Random();

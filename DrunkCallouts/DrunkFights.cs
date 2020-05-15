@@ -10,7 +10,7 @@ using CitizenFX.Core.Native;
 namespace DrunkCallouts
 {
     
-    [CalloutProperties("Drunk Fight", "BGHDDevelopment", "0.0.1", Probability.Medium)]
+    [CalloutProperties("Drunk Fight", "BGHDDevelopment", "0.0.2", Probability.Medium)]
     public class DrunkFight : Callout
     {
 
