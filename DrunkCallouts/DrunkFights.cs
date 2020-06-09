@@ -4,13 +4,13 @@ using System.Collections.Generic;
 using System.Dynamic;
 using System.Threading.Tasks;
 using CitizenFX.Core;
-using CalloutAPI;
 using CitizenFX.Core.Native;
+using FivePD.API;
 
 namespace DrunkCallouts
 {
     
-    [CalloutProperties("Drunk Fight", "BGHDDevelopment", "0.0.2", Probability.Medium)]
+    [CalloutProperties("Drunk Fight", "BGHDDevelopment", "0.0.3", Probability.Medium)]
     public class DrunkFight : Callout
     {
 
