@@ -63,6 +63,7 @@ namespace DrunkCallouts
             items.Add(Wine);
             data.items = items;
             Utilities.SetPedData(driver.NetworkId,data);
+            Utilities.ExcludeVehicleFromTrafficStop(bike.NetworkId,true);
 
             //Tasks
             driver.AlwaysKeepTask = true;

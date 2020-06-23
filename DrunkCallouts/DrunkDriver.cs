@@ -76,6 +76,7 @@ namespace DrunkCallouts
             items.Add(DogCollar);
             data.items = items;
             Utilities.SetPedData(driver.NetworkId,data);
+            Utilities.ExcludeVehicleFromTrafficStop(car.NetworkId,true);
 
             //Tasks
             driver.AlwaysKeepTask = true;
