@@ -10,7 +10,7 @@ using FivePD.API;
 namespace DrunkCallouts
 {
     
-    [CalloutProperties("Drunk Fight", "BGHDDevelopment", "0.0.3", Probability.Medium)]
+    [CalloutProperties("Drunk Fight", "BGHDDevelopment", "0.0.3")]
     public class DrunkFight : Callout
     {
 
@@ -22,11 +22,12 @@ namespace DrunkCallouts
             Random rnd = new Random();
             float offsetX = rnd.Next(100, 700);
             float offsetY = rnd.Next(100, 700);
-            InitBase(World.GetNextPositionOnStreet(Game.PlayerPed.GetOffsetPosition(new Vector3(offsetX, offsetY, 0))));
+            InitInfo(World.GetNextPositionOnStreet(Game.PlayerPed.GetOffsetPosition(new Vector3(offsetX, offsetY, 0))));
             ShortName = "Drunk Fight";
             CalloutDescription = "A fight has broken out between two drunk people.";
             ResponseCode = 3;
             StartDistance = 75f;
+            UpdateData();
         }
 
         public async override void OnStart(Ped player)
@@ -40,9 +41,9 @@ namespace DrunkCallouts
             suspect2.AttachBlip();
         }
         
-        public async override Task Init()
+        public async override Task OnAccept()
         {
-            OnAccept();
+            InitBlip();
             suspect = await SpawnPed(GetRandomPed(), Location + 2);
             suspect2 = await SpawnPed(GetRandomPed(), Location + 2);
 
@@ -55,7 +56,7 @@ namespace DrunkCallouts
             };
             items.Add(Wine);
             data.items = items;
-            SetPedData(suspect.NetworkId,data);
+            Utilities.SetPedData(suspect.NetworkId,data);
 
             //Suspect2 Data
             dynamic data2 = new ExpandoObject();
@@ -66,7 +67,7 @@ namespace DrunkCallouts
             };
             items.Add(Beer);
             data.items2 = items2;
-            SetPedData(suspect2.NetworkId,data2);
+            Utilities.SetPedData(suspect2.NetworkId,data2);
             
             //Tasks
             suspect.AlwaysKeepTask = true;

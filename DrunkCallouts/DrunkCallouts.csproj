@@ -35,7 +35,7 @@
         <Reference Include="CitizenFX.Core, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
           <HintPath>..\..\..\Desktop\FivePD Dev\CitizenFX.Core.dll</HintPath>
         </Reference>
-        <Reference Include="FivePD.net, Version=0.7.0.0, Culture=neutral, PublicKeyToken=null">
+        <Reference Include="FivePD.net, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
           <HintPath>..\..\..\Desktop\FivePD Dev\FivePD.net.dll</HintPath>
         </Reference>
         <Reference Include="Microsoft.CSharp" />

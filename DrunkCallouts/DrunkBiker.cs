@@ -9,7 +9,7 @@ using FivePD.API;
 namespace DrunkCallouts
 {
     
-    [CalloutProperties("Drunk Biker", "BGHDDevelopment", "0.0.3", Probability.Medium)]
+    [CalloutProperties("Drunk Biker", "BGHDDevelopment", "0.0.3")]
     public class DrunkBiker : Callout
     {
 
@@ -21,17 +21,18 @@ namespace DrunkCallouts
             Random rnd = new Random();
             float offsetX = rnd.Next(100, 700);
             float offsetY = rnd.Next(100, 700);
-            InitBase(World.GetNextPositionOnStreet(Game.PlayerPed.GetOffsetPosition(new Vector3(offsetX, offsetY, 0))));
+            InitInfo(World.GetNextPositionOnStreet(Game.PlayerPed.GetOffsetPosition(new Vector3(offsetX, offsetY, 0))));
             ShortName = "Drunk Biker";
             CalloutDescription = "A person is biking while drunk.";
             ResponseCode = 3;
             StartDistance = 150f;
+            UpdateData();
         }
 
         public async override void OnStart(Ped player)
         {
             base.OnStart(player);
-            dynamic playerData = GetPlayerData();
+            dynamic playerData = Utilities.GetPlayerData();
             string displayName = playerData.DisplayName;
             API.SetPedIsDrunk(driver.GetHashCode(), true);
             API.SetDriveTaskMaxCruiseSpeed(driver.GetHashCode(), 35f);
@@ -40,15 +41,15 @@ namespace DrunkCallouts
             Notify("~o~Officer ~b~" + displayName + ",~o~ the biker is fleeing!");
             bike.AttachBlip();
             driver.AttachBlip();
-            dynamic data1 = await GetPedData(driver.NetworkId);
+            dynamic data1 = await Utilities.GetPedData(driver.NetworkId);
             string firstname = data1.Firstname;
             API.Wait(6000);
             DrawSubtitle("~r~[" + firstname + "] ~s~Are those police lights?", 5000);
         }
         
-        public async override Task Init()
+        public async override Task OnAccept()
         {
-            OnAccept();
+            InitBlip();
             driver = await SpawnPed(GetRandomPed(), Location + 2);
             bike = await SpawnVehicle(VehicleHash.TriBike, Location);
             driver.SetIntoVehicle(bike, VehicleSeat.Driver);
@@ -61,7 +62,7 @@ namespace DrunkCallouts
             };
             items.Add(Wine);
             data.items = items;
-            SetPedData(driver.NetworkId,data);
+            Utilities.SetPedData(driver.NetworkId,data);
 
             //Tasks
             driver.AlwaysKeepTask = true;
