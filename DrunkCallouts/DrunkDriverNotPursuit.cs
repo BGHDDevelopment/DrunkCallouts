@@ -27,7 +27,6 @@ namespace DrunkCallouts
             CalloutDescription = "A driver is drinking and driving.";
             ResponseCode = 3;
             StartDistance = 150f;
-            UpdateData();
         }
 
         public async override void OnStart(Ped player)
@@ -49,6 +48,7 @@ namespace DrunkCallouts
         public async override Task OnAccept()
         {
             InitBlip();
+            UpdateData();
             driver = await SpawnPed(GetRandomPed(), Location + 2);
             Random random = new Random();
             string cartype = carList[random.Next(carList.Length)];

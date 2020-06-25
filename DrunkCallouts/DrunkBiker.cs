@@ -26,7 +26,6 @@ namespace DrunkCallouts
             CalloutDescription = "A person is biking while drunk.";
             ResponseCode = 3;
             StartDistance = 150f;
-            UpdateData();
         }
 
         public async override void OnStart(Ped player)
@@ -50,6 +49,7 @@ namespace DrunkCallouts
         public async override Task OnAccept()
         {
             InitBlip();
+            UpdateData();
             driver = await SpawnPed(GetRandomPed(), Location + 2);
             bike = await SpawnVehicle(VehicleHash.TriBike, Location);
             driver.SetIntoVehicle(bike, VehicleSeat.Driver);

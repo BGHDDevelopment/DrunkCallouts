@@ -27,7 +27,6 @@ namespace DrunkCallouts
             CalloutDescription = "A fight has broken out between two drunk people.";
             ResponseCode = 3;
             StartDistance = 75f;
-            UpdateData();
         }
 
         public async override void OnStart(Ped player)
@@ -44,6 +43,7 @@ namespace DrunkCallouts
         public async override Task OnAccept()
         {
             InitBlip();
+            UpdateData();
             suspect = await SpawnPed(GetRandomPed(), Location + 2);
             suspect2 = await SpawnPed(GetRandomPed(), Location + 2);
 
