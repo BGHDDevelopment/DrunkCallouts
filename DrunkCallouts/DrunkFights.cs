@@ -1,22 +1,20 @@
 ﻿using System;
-using System.CodeDom;
 using System.Collections.Generic;
 using System.Dynamic;
 using System.Threading.Tasks;
 using CitizenFX.Core;
 using CitizenFX.Core.Native;
 using FivePD.API;
+using FivePD.API.Utils;
 
 namespace DrunkCallouts
 {
     
-    [CalloutProperties("Drunk Fight", "BGHDDevelopment", "0.0.3")]
+    [CalloutProperties("Drunk Fight", "BGHDDevelopment", "0.0.4")]
     public class DrunkFight : Callout
     {
 
         private Ped suspect, suspect2;
-        List<object> items = new List<object>();
-        List<object> items2 = new List<object>();
 
         public DrunkFight() {
             Random rnd = new Random();
@@ -44,29 +42,31 @@ namespace DrunkCallouts
         {
             InitBlip();
             UpdateData();
-            suspect = await SpawnPed(GetRandomPed(), Location + 2);
-            suspect2 = await SpawnPed(GetRandomPed(), Location + 2);
+            suspect = await SpawnPed(RandomUtils.GetRandomPed(), Location + 2);
+            suspect2 = await SpawnPed(RandomUtils.GetRandomPed(), Location + 2);
 
             //Suspect Data
-            dynamic data = new ExpandoObject();
-            data.alcoholLevel = 0.10;
-            object Wine = new {
+            PedData data = new PedData();
+            List<Item> items = new List<Item>();
+            data.BloodAlcoholLevel = 0.10;
+            Item Wine = new Item {
                 Name = "Wine",
                 IsIllegal = false
             };
             items.Add(Wine);
-            data.items = items;
+            data.Items = items;
             Utilities.SetPedData(suspect.NetworkId,data);
 
             //Suspect2 Data
-            dynamic data2 = new ExpandoObject();
-            data.alcoholLevel = 0.15;
-            object Beer = new {
+            PedData data2 = new PedData();
+            List<Item> items2 = new List<Item>();
+            data.BloodAlcoholLevel = 0.15;
+            Item BeerBottle = new Item {
                 Name = "Beer",
                 IsIllegal = false
             };
-            items.Add(Beer);
-            data.items2 = items2;
+            items.Add(BeerBottle);
+            data.Items = items2;
             Utilities.SetPedData(suspect2.NetworkId,data2);
             
             //Tasks
@@ -74,21 +74,6 @@ namespace DrunkCallouts
             suspect.BlockPermanentEvents = true;
             suspect2.AlwaysKeepTask = true;
             suspect2.BlockPermanentEvents = true;
-        }
-        private void Notify(string message)
-        {
-            API.BeginTextCommandThefeedPost("STRING");
-            API.AddTextComponentSubstringPlayerName(message);
-            API.EndTextCommandThefeedPostTicker(false, true);
-        }
-        private void DrawSubtitle(string message, int duration)
-        {
-            API.BeginTextCommandPrint("STRING");
-            API.AddTextComponentSubstringPlayerName(message);
-            API.EndTextCommandPrint(duration, false);
-        }
-        public override void OnCancelBefore()
-        {
         }
     }
 }

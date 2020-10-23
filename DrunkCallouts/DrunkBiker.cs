@@ -5,17 +5,17 @@ using System.Threading.Tasks;
 using CitizenFX.Core;
 using CitizenFX.Core.Native;
 using FivePD.API;
+using FivePD.API.Utils;
 
 namespace DrunkCallouts
 {
     
-    [CalloutProperties("Drunk Biker", "BGHDDevelopment", "0.0.3")]
+    [CalloutProperties("Drunk Biker", "BGHDDevelopment", "0.0.4")]
     public class DrunkBiker : Callout
     {
 
         private Vehicle bike;
         private Ped driver;
-        List<object> items = new List<object>();
 
         public DrunkBiker() {
             Random rnd = new Random();
@@ -31,7 +31,7 @@ namespace DrunkCallouts
         public async override void OnStart(Ped player)
         {
             base.OnStart(player);
-            dynamic playerData = Utilities.GetPlayerData();
+            PlayerData playerData = Utilities.GetPlayerData();
             string displayName = playerData.DisplayName;
             API.SetPedIsDrunk(driver.GetHashCode(), true);
             API.SetDriveTaskMaxCruiseSpeed(driver.GetHashCode(), 35f);
@@ -40,8 +40,8 @@ namespace DrunkCallouts
             Notify("~o~Officer ~b~" + displayName + ",~o~ the biker is fleeing!");
             bike.AttachBlip();
             driver.AttachBlip();
-            dynamic data1 = await Utilities.GetPedData(driver.NetworkId);
-            string firstname = data1.Firstname;
+            PedData data1 = await Utilities.GetPedData(driver.NetworkId);
+            string firstname = data1.FirstName;
             API.Wait(6000);
             DrawSubtitle("~r~[" + firstname + "] ~s~Are those police lights?", 5000);
         }
@@ -50,18 +50,20 @@ namespace DrunkCallouts
         {
             InitBlip();
             UpdateData();
-            driver = await SpawnPed(GetRandomPed(), Location + 2);
+            driver = await SpawnPed(RandomUtils.GetRandomPed(), Location + 2);
             bike = await SpawnVehicle(VehicleHash.TriBike, Location);
             driver.SetIntoVehicle(bike, VehicleSeat.Driver);
+           
             //Driver Data
-            dynamic data = new ExpandoObject();
-            data.alcoholLevel = 0.10;
-            object Wine = new {
+            PedData data = new PedData();
+            List<Item> items = new List<Item>();
+            data.BloodAlcoholLevel = 0.10;
+            Item Wine = new Item {
                 Name = "Wine",
-                IsIllegal = false
+                IsIllegal = true
             };
             items.Add(Wine);
-            data.items = items;
+            data.Items = items;
             Utilities.SetPedData(driver.NetworkId,data);
             Utilities.ExcludeVehicleFromTrafficStop(bike.NetworkId,true);
 
@@ -80,9 +82,6 @@ namespace DrunkCallouts
             API.BeginTextCommandPrint("STRING");
             API.AddTextComponentSubstringPlayerName(message);
             API.EndTextCommandPrint(duration, false);
-        }
-        public override void OnCancelBefore()
-        {
         }
     }
 }

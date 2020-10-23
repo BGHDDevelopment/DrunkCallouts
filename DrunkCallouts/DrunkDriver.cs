@@ -5,17 +5,17 @@ using System.Threading.Tasks;
 using CitizenFX.Core;
 using CitizenFX.Core.Native;
 using FivePD.API;
+using FivePD.API.Utils;
 
 namespace DrunkCallouts
 {
     
-    [CalloutProperties("Drunk Driver Pursuit", "BGHDDevelopment", "0.0.3")]
+    [CalloutProperties("Drunk Driver Pursuit", "BGHDDevelopment", "0.0.4")]
     public class DrunkDriver : Callout
     {
 
         private Vehicle car;
         private Ped driver;
-        List<object> items = new List<object>();
         private string[] carList = { "speedo", "speedo2", "stanier", "stinger", "stingergt", "stratum", "stretch", "taco", "tornado", "tornado2", "tornado3", "tornado4", "tourbus", "vader", "voodoo2", "dune5", "youga", "taxi", "tailgater", "sentinel2", "sentinel", "sandking2", "sandking", "ruffian", "rumpo", "rumpo2", "oracle2", "oracle", "ninef2", "ninef", "minivan", "gburrito", "emperor2", "emperor"};
 
         public DrunkDriver() {
@@ -32,7 +32,7 @@ namespace DrunkCallouts
         public async override void OnStart(Ped player)
         {
             base.OnStart(player);
-            dynamic playerData = Utilities.GetPlayerData();
+            PlayerData playerData = Utilities.GetPlayerData();
             string displayName = playerData.DisplayName;
             API.SetPedIsDrunk(driver.GetHashCode(), true);
             API.SetDriveTaskMaxCruiseSpeed(driver.GetHashCode(), 35f);
@@ -41,8 +41,8 @@ namespace DrunkCallouts
             Notify("~o~Officer ~b~" + displayName + ",~o~ the driver is fleeing!");
             car.AttachBlip();
             driver.AttachBlip();
-            dynamic data1 = await Utilities.GetPedData(driver.NetworkId);
-            string firstname = data1.Firstname;
+            PedData data1 = await Utilities.GetPedData(driver.NetworkId);
+            string firstname = data1.FirstName;
             API.Wait(6000);
             DrawSubtitle("~r~[" + firstname + "] ~s~Is that a bird?", 5000);
         }
@@ -51,30 +51,31 @@ namespace DrunkCallouts
         {
             InitBlip();
             UpdateData();
-            driver = await SpawnPed(GetRandomPed(), Location + 2);
+            driver = await SpawnPed(RandomUtils.GetRandomPed(), Location + 2);
             Random random = new Random();
             string cartype = carList[random.Next(carList.Length)];
             VehicleHash Hash = (VehicleHash) API.GetHashKey(cartype);
             car = await SpawnVehicle(Hash, Location);
             driver.SetIntoVehicle(car, VehicleSeat.Driver);
-            dynamic playerData = Utilities.GetPlayerData();
+            PlayerData playerData = Utilities.GetPlayerData();
             string displayName = playerData.DisplayName;
             Notify("~r~[DrunkCallouts] ~y~Officer ~b~" + displayName + ",~y~ the suspect is driving a " + cartype + "!");
             
             //Driver Data
-            dynamic data = new ExpandoObject();
-            data.alcoholLevel = 0.18;
-            object BeerBottle = new {
+            PedData data = new PedData();
+            data.BloodAlcoholLevel = 0.18;
+            List<Item> items = new List<Item>();
+            Item BeerBottle = new Item {
                 Name = "Beer",
                 IsIllegal = false
             };
-            object DogCollar = new {
+            Item DogCollar = new Item {
                 Name = "Dog Collar",
                 IsIllegal = false
             };
             items.Add(BeerBottle);
             items.Add(DogCollar);
-            data.items = items;
+            data.Items = items;
             Utilities.SetPedData(driver.NetworkId,data);
             Utilities.ExcludeVehicleFromTrafficStop(car.NetworkId,true);
 
@@ -93,9 +94,6 @@ namespace DrunkCallouts
             API.BeginTextCommandPrint("STRING");
             API.AddTextComponentSubstringPlayerName(message);
             API.EndTextCommandPrint(duration, false);
-        }
-        public override void OnCancelBefore()
-        {
         }
     }
 }
