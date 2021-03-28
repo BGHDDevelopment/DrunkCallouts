@@ -1,5 +1,5 @@
-# CarCallouts
-CarCallouts is a pack for the FiveM resource FivePD.
+# DrunkCallouts
+DrunkCallouts is a pack for the FiveM resource FivePD.
 
 # Install
 You may download and just use the callout pack via [GTAPoliceMods](https://gtapolicemods.com/files/file/1006-drunk-callouts/).
