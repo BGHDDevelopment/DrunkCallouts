@@ -10,7 +10,7 @@ using FivePD.API.Utils;
 namespace DrunkCallouts
 {
     
-    [CalloutProperties("Drunk Driver Pursuit", "BGHDDevelopment", "0.0.4")]
+    [CalloutProperties("Drunk Driver Pursuit", "BGHDDevelopment", "1.0.0")]
     public class DrunkDriver : Callout
     {
 
@@ -32,25 +32,6 @@ namespace DrunkCallouts
         public async override void OnStart(Ped player)
         {
             base.OnStart(player);
-            PlayerData playerData = Utilities.GetPlayerData();
-            string displayName = playerData.DisplayName;
-            API.SetPedIsDrunk(driver.GetHashCode(), true);
-            API.SetDriveTaskMaxCruiseSpeed(driver.GetHashCode(), 35f);
-            API.SetDriveTaskDrivingStyle(driver.GetHashCode(), 524852);
-            driver.Task.FleeFrom(player);
-            Notify("~o~Officer ~b~" + displayName + ",~o~ the driver is fleeing!");
-            car.AttachBlip();
-            driver.AttachBlip();
-            PedData data1 = await Utilities.GetPedData(driver.NetworkId);
-            string firstname = data1.FirstName;
-            API.Wait(6000);
-            DrawSubtitle("~r~[" + firstname + "] ~s~Is that a bird?", 5000);
-        }
-        
-        public async override Task OnAccept()
-        {
-            InitBlip();
-            UpdateData();
             driver = await SpawnPed(RandomUtils.GetRandomPed(), Location + 2);
             Random random = new Random();
             string cartype = carList[random.Next(carList.Length)];
@@ -82,6 +63,23 @@ namespace DrunkCallouts
             //Tasks
             driver.AlwaysKeepTask = true;
             driver.BlockPermanentEvents = true;
+            API.SetPedIsDrunk(driver.GetHashCode(), true);
+            API.SetDriveTaskMaxCruiseSpeed(driver.GetHashCode(), 35f);
+            API.SetDriveTaskDrivingStyle(driver.GetHashCode(), 524852);
+            driver.Task.FleeFrom(player);
+            Notify("~o~Officer ~b~" + displayName + ",~o~ the driver is fleeing!");
+            car.AttachBlip();
+            driver.AttachBlip();
+            PedData data1 = await Utilities.GetPedData(driver.NetworkId);
+            string firstname = data1.FirstName;
+            API.Wait(6000);
+            DrawSubtitle("~r~[" + firstname + "] ~s~Is that a bird?", 5000);
+        }
+        
+        public async override Task OnAccept()
+        {
+            InitBlip();
+            UpdateData();
         }
         private void Notify(string message)
         {

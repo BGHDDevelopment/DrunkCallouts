@@ -10,7 +10,7 @@ using FivePD.API.Utils;
 namespace DrunkCallouts
 {
     
-    [CalloutProperties("Drunk Biker", "BGHDDevelopment", "0.0.4")]
+    [CalloutProperties("Drunk Biker", "BGHDDevelopment", "1.0.0")]
     public class DrunkBiker : Callout
     {
 
@@ -31,25 +31,6 @@ namespace DrunkCallouts
         public async override void OnStart(Ped player)
         {
             base.OnStart(player);
-            PlayerData playerData = Utilities.GetPlayerData();
-            string displayName = playerData.DisplayName;
-            API.SetPedIsDrunk(driver.GetHashCode(), true);
-            API.SetDriveTaskMaxCruiseSpeed(driver.GetHashCode(), 35f);
-            API.SetDriveTaskDrivingStyle(driver.GetHashCode(), 524852);
-            driver.Task.FleeFrom(player);
-            Notify("~o~Officer ~b~" + displayName + ",~o~ the biker is fleeing!");
-            bike.AttachBlip();
-            driver.AttachBlip();
-            PedData data1 = await Utilities.GetPedData(driver.NetworkId);
-            string firstname = data1.FirstName;
-            API.Wait(6000);
-            DrawSubtitle("~r~[" + firstname + "] ~s~Are those police lights?", 5000);
-        }
-        
-        public async override Task OnAccept()
-        {
-            InitBlip();
-            UpdateData();
             driver = await SpawnPed(RandomUtils.GetRandomPed(), Location + 2);
             bike = await SpawnVehicle(VehicleHash.TriBike, Location);
             driver.SetIntoVehicle(bike, VehicleSeat.Driver);
@@ -70,6 +51,25 @@ namespace DrunkCallouts
             //Tasks
             driver.AlwaysKeepTask = true;
             driver.BlockPermanentEvents = true;
+            PlayerData playerData = Utilities.GetPlayerData();
+            string displayName = playerData.DisplayName;
+            API.SetPedIsDrunk(driver.GetHashCode(), true);
+            API.SetDriveTaskMaxCruiseSpeed(driver.GetHashCode(), 35f);
+            API.SetDriveTaskDrivingStyle(driver.GetHashCode(), 524852);
+            driver.Task.FleeFrom(player);
+            Notify("~o~Officer ~b~" + displayName + ",~o~ the biker is fleeing!");
+            bike.AttachBlip();
+            driver.AttachBlip();
+            PedData data1 = await Utilities.GetPedData(driver.NetworkId);
+            string firstname = data1.FirstName;
+            API.Wait(6000);
+            DrawSubtitle("~r~[" + firstname + "] ~s~Are those police lights?", 5000);
+        }
+        
+        public async override Task OnAccept()
+        {
+            InitBlip();
+            UpdateData();
         }
         private void Notify(string message)
         {

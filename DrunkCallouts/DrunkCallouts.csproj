@@ -33,11 +33,11 @@
     </PropertyGroup>
     <ItemGroup>
         <Reference Include="CitizenFX.Core.Client, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
-          <HintPath>..\packages\CitizenFX.Core.Client.1.0.2974\lib\net45\CitizenFX.Core.Client.dll</HintPath>
+          <HintPath>..\packages\CitizenFX.Core.Client.1.0.3324\lib\net45\CitizenFX.Core.Client.dll</HintPath>
           <Private>True</Private>
         </Reference>
-        <Reference Include="FivePD.net, Version=1.1.1.0, Culture=neutral, PublicKeyToken=null">
-          <HintPath>..\packages\FivePD.net.1.1.1\lib\net452\FivePD.net.dll</HintPath>
+        <Reference Include="FivePD.net, Version=1.2.0.3, Culture=neutral, PublicKeyToken=null">
+          <HintPath>..\packages\FivePD.net.1.2.0.3\lib\net452\FivePD.net.dll</HintPath>
           <Private>True</Private>
         </Reference>
         <Reference Include="Microsoft.CSharp" />

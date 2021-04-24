@@ -10,7 +10,7 @@ using FivePD.API.Utils;
 namespace DrunkCallouts
 {
     
-    [CalloutProperties("Drunk Driver", "BGHDDevelopment", "0.0.4")]
+    [CalloutProperties("Drunk Driver", "BGHDDevelopment", "1.0.0")]
     public class DrunkDriverNotPursuit : Callout
     {
 
@@ -32,21 +32,6 @@ namespace DrunkCallouts
         public async override void OnStart(Ped player)
         {
             base.OnStart(player);
-            API.SetPedIsDrunk(driver.GetHashCode(), true);
-            driver.Task.WanderAround();
-            driver.Task.CruiseWithVehicle(car, 35f,524852);
-            car.AttachBlip();
-            driver.AttachBlip();
-            PedData data1 = await Utilities.GetPedData(driver.NetworkId);
-            string firstname = data1.FirstName;
-            API.Wait(6000);
-            DrawSubtitle("~r~[" + firstname + "] ~s~My head hurts!", 5000);
-        }
-        
-        public async override Task OnAccept()
-        {
-            InitBlip();
-            UpdateData();
             driver = await SpawnPed(RandomUtils.GetRandomPed(), Location + 2);
             Random random = new Random();
             string cartype = carList[random.Next(carList.Length)];
@@ -72,6 +57,21 @@ namespace DrunkCallouts
             //Tasks
             driver.AlwaysKeepTask = true;
             driver.BlockPermanentEvents = true;
+            API.SetPedIsDrunk(driver.GetHashCode(), true);
+            driver.Task.WanderAround();
+            driver.Task.CruiseWithVehicle(car, 35f,524852);
+            car.AttachBlip();
+            driver.AttachBlip();
+            PedData data1 = await Utilities.GetPedData(driver.NetworkId);
+            string firstname = data1.FirstName;
+            API.Wait(6000);
+            DrawSubtitle("~r~[" + firstname + "] ~s~My head hurts!", 5000);
+        }
+        
+        public async override Task OnAccept()
+        {
+            InitBlip();
+            UpdateData();
         }
         private void Notify(string message)
         {

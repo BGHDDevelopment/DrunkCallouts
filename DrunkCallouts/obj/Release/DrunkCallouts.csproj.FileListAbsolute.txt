@@ -7,3 +7,14 @@ C:\Users\USER\RiderProjects\DrunkCallouts\DrunkCallouts\obj\Release\DrunkCallout
 C:\Users\USER\RiderProjects\DrunkCallouts\DrunkCallouts\obj\Release\DrunkCallouts.net.dll
 C:\Users\USER\RiderProjects\DrunkCallouts\DrunkCallouts\obj\Release\DrunkCallouts.net.pdb
 C:\Users\USER\RiderProjects\DrunkCallouts\DrunkCallouts\bin\Release\FivePD.net.dll
+C:\Users\steph\Desktop\Source\DrunkCallouts\DrunkCallouts\bin\Release\DrunkCallouts.net.dll
+C:\Users\steph\Desktop\Source\DrunkCallouts\DrunkCallouts\bin\Release\DrunkCallouts.net.pdb
+C:\Users\steph\Desktop\Source\DrunkCallouts\DrunkCallouts\bin\Release\CitizenFX.Core.Client.dll
+C:\Users\steph\Desktop\Source\DrunkCallouts\DrunkCallouts\bin\Release\FivePD.net.dll
+C:\Users\steph\Desktop\Source\DrunkCallouts\DrunkCallouts\bin\Release\CitizenFX.Core.Client.xml
+C:\Users\steph\Desktop\Source\DrunkCallouts\DrunkCallouts\bin\Release\FivePD.net.xml
+C:\Users\steph\Desktop\Source\DrunkCallouts\DrunkCallouts\obj\Release\DrunkCallouts.csprojAssemblyReference.cache
+C:\Users\steph\Desktop\Source\DrunkCallouts\DrunkCallouts\obj\Release\DrunkCallouts.csproj.CoreCompileInputs.cache
+C:\Users\steph\Desktop\Source\DrunkCallouts\DrunkCallouts\obj\Release\DrunkCallouts.csproj.CopyComplete
+C:\Users\steph\Desktop\Source\DrunkCallouts\DrunkCallouts\obj\Release\DrunkCallouts.net.dll
+C:\Users\steph\Desktop\Source\DrunkCallouts\DrunkCallouts\obj\Release\DrunkCallouts.net.pdb
